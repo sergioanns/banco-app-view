@@ -1,0 +1,24 @@
+<form [formGroup]="accountForm" class="d-flex align-items-center justify-content-center h-100">
+    <div class="w-100">
+        <h4>Crear una cuenta</h4>
+        <div class="mb-3">
+            <label class="form-label">Numero de cédula</label>
+            <input formControlName="identification" type="number" class="form-control shadow-sm"
+                placeholder="103123312">
+            <!--         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Nombre Completo</label>
+            <input formControlName="full_name" class="form-control shadow-sm" placeholder="Jorge Casas">
+        </div>
+        <div class="mb-4">
+            <label class="form-label">Saldo Inicial</label>
+            <input formControlName="account_balance" type="number" class="form-control shadow-sm"
+                placeholder="250000">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary" (click)="newAccountEvent.emit(accountForm.controls)"
+                [disabled]="!accountForm.valid">Agregar cuenta Bancaria</button>
+        </div>
+    </div>
+</form>

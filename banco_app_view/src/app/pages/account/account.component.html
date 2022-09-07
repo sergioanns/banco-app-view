@@ -1,0 +1,10 @@
+<div class="card card-body border-0 rounded-0 shadow p-4 mt-5 animate__animated animate__fadeIn">
+    <div class="row">
+        <div class="col-md-5 col-12 mb-4 border-end px-md-5">
+            <app-create-account (newAccountEvent)="onCreateAccount($event)"></app-create-account>
+        </div>
+        <div class="col-md-7 col-12 px-md-5">
+            <app-account-list (transferenceEvent)="onClickTransference($event)" ></app-account-list>
+        </div>
+    </div>
+</div>

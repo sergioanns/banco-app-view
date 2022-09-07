@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col">
+        <h4>Listado de cuentas</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="list-group" *ngIf="accountArray.length > 0">
+            <a class="list-group-item list-group-item-action" aria-current="true" *ngFor="
+            let account of accountArray | paginate: { itemsPerPage: 3, currentPage: p }
+            ">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">{{account.full_name}}</h5>
+                    <small><button class="btn btn-sm btn-primary"
+                            (click)="setControls(account)">Transferir</button></small>
+                </div>
+
+                <p class="mb-1 mt-2 text-muted d-flex w-100 justify-content-between"><small>CC
+                        {{account.identification}}</small> <small> Saldo ${{account.account_balance}}.</small></p>
+
+            </a>
+        </div>
+        <div class="alert alert-primary mt-2" role="alert" *ngIf="accountArray.length == 0">
+            Aun no hay cuentas agregadas.
+        </div>
+        <pagination-controls class="d-flex justify-content-center mt-2" (pageChange)="p = $event" responsive="true"
+            *ngIf="accountArray.length > 0" previousLabel="" nextLabel="">
+        </pagination-controls>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <hr>
+        <h4>Comenzar Transferencia</h4>
+        <form [formGroup]="accountForm">
+            <div class="row">
+                <div class="col mb-3">
+                    <label class="form-label">Cédula origen</label>
+                    <input formControlName="id_origin" class="form-control shadow-sm" placeholder="Ej: 103123312">
+                </div>
+                <div class="col mb-3">
+                    <label class="form-label">Cédula destino</label>
+                    <input formControlName="id_destination" class="form-control shadow-sm" placeholder="Ej: 731231">
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Saldo Inicial</label>
+                <input formControlName="account_balance" type="number" class="form-control shadow-sm"
+                    placeholder="120000">
+            </div>
+            <button type="submit" class="btn btn-primary" (click)="transferenceEvent.emit(accountForm.controls)"
+                [disabled]="!accountForm.valid">Aceptar</button>
+        </form>
+    </div>
+</div>
